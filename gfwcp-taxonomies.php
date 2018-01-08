@@ -239,7 +239,7 @@ require_once( GFWCP_BASE_DIR . '/vendor/plugin-update-checker/plugin-update-chec
  * 
  * @since 1.0.0.2
  */
-function wcp_check_plugin_updates() {
+function gfwcp_check_plugin_updates() {
 	$ndf_UpdateChecker = Puc_v4_Factory::buildUpdateChecker(
 		'https://github.com/hananetseek/Gravity-Forms-WCP-Taxonomies-Form-Settings',
 		__FILE__,
@@ -248,4 +248,4 @@ function wcp_check_plugin_updates() {
 
 	$ndf_UpdateChecker->setBranch('master');
 }
-add_action( 'admin_init', 'wcp_check_plugin_updates' );
+add_action( 'admin_init', 'gfwcp_check_plugin_updates' );
