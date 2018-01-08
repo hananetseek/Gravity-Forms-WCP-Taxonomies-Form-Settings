@@ -3,12 +3,16 @@
  * Plugin Name: 	Gravity Forms + WCP Taxonomies Form Settings
  * Plugin URI: 		https://www.netseek.com.au/
  * Description: 	Display WCP Taxonomy terms as checkbox fields that shows hierarchy.
- * Version: 		1.0.0.1
+ * Version: 		1.0.0.2
  * Author: 			Netseek Pty Ltd
  * Author URI: 		https://www.netseek.com.au/
  * License:    		GPL2
  * License URI:		https://www.gnu.org/licenses/gpl-2.0.html
  */
+if ( ! defined( 'WPINC' ) ) { die(); }
+
+if( !defined('GFWCP_BASE_DIR') ) { define('GFWCP_BASE_DIR', dirname(__FILE__)); }
+if( !defined('GFWCP_BASE_URL') ) { define('GFWCP_BASE_URL', plugins_url( '', __FILE__ ) ); }
 
  class GFWCP_Taxonomies_Form {
 	function __construct() {
@@ -222,3 +226,26 @@
 	}
 }
 new GFWCP_Taxonomies_Form();
+
+/*
+ * Plugin Updater.
+ *
+ * @since 1.0.0.2
+ */
+require_once( GFWCP_BASE_DIR . '/vendor/plugin-update-checker/plugin-update-checker.php' );
+
+/**
+ * Check for plugin updates.
+ * 
+ * @since 1.0.0.2
+ */
+function wcp_check_plugin_updates() {
+	$ndf_UpdateChecker = Puc_v4_Factory::buildUpdateChecker(
+		'https://github.com/hananetseek/Gravity-Forms-WCP-Taxonomies-Form-Settings',
+		__FILE__,
+		'gravity-forms-wcp-taxonomies'
+	);
+
+	$ndf_UpdateChecker->setBranch('master');
+}
+add_action( 'admin_init', 'wcp_check_plugin_updates' );
