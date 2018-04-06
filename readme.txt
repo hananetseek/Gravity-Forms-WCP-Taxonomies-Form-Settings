@@ -1,10 +1,13 @@
 # Gravity Forms + WCP Taxonomies Form Settings #
 Requires at least: 4.1
-Tested up to: 4.9.1
+Tested up to: 4.9.5
 
 Display WCP Taxonomy terms as checkbox fields that shows hierarchy.
 
 ## Changelog ##
+
+### 1.0.0.3 ###
+1. Minor fixes.
 
 ### 1.0.0.2 ###
 1. Add plugin update checker script.

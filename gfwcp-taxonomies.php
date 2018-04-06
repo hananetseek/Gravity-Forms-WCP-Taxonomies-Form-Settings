@@ -3,7 +3,7 @@
  * Plugin Name: 	Gravity Forms + WCP Taxonomies Form Settings
  * Plugin URI: 		https://www.netseek.com.au/
  * Description: 	Display WCP Taxonomy terms as checkbox fields that shows hierarchy.
- * Version: 		1.0.0.2
+ * Version: 		1.0.0.3
  * Author: 			Netseek Pty Ltd
  * Author URI: 		https://www.netseek.com.au/
  * License:    		GPL2
@@ -210,11 +210,11 @@ if( !defined('GFWCP_BASE_URL') ) { define('GFWCP_BASE_URL', plugins_url( '', __F
 	
 	public function wcp_get_taxonomy_hierarchy( $taxonomy, $parent = 0 ) {
 		$taxonomy = is_array( $taxonomy ) ? array_shift( $taxonomy ) : $taxonomy;
-		$terms = get_terms( $taxonomy, array( 'parent' => $parent ) );
+		$terms = get_terms( $taxonomy, array( 'parent' => $parent, 'hide_empty' => false ) );
 
 		$children = array();
 		foreach ( $terms as $term ){
-			$term->children = get_taxonomy_hierarchy( $taxonomy, $term->term_id );
+			$term->children = $this->wcp_get_taxonomy_hierarchy( $taxonomy, $term->term_id );
 			if( empty( $term->children ) ){
 				$children[$term->term_id] = array( 'name' => $term->name );
 			}
